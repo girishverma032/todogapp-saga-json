@@ -1,0 +1,19 @@
+.delete-icon {
+  background-color: red;
+  padding: 10px 5px;
+  color: rgb(185, 34, 34);
+  font-weight: 900;
+  cursor: pointer;
+}
+ul {
+  list-style: none;
+  background-color: aliceblue;
+  width: 300px;
+}
+li {
+  background: #ccc;
+  padding: 10px;
+  padding-left: 0;
+  border-bottom: 1px solid #bbb;
+  color: brown;
+}
