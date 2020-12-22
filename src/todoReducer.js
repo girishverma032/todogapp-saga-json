@@ -16,6 +16,9 @@ export const todoReducer=( state =initialState ,action)=>{
       case "REMOVE_TODO":
         state={...state}
         break;
+      case "UPDATE_TODO":
+        state={...state}
+        break;
       default:
         state={...state}  
     }

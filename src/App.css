@@ -1,19 +1,25 @@
 .delete-icon {
-  background-color: red;
-  padding: 10px 5px;
-  color: rgb(185, 34, 34);
   font-weight: 900;
+  border: 1px solid #823db5;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  text-align: center;
   cursor: pointer;
 }
 ul {
   list-style: none;
-  background-color: aliceblue;
-  width: 300px;
+  width: 98%;
+  width: 100;
+  padding: 0;
+  margin: 10px 0;
+  border-radius: 2px;
 }
-li {
-  background: #ccc;
-  padding: 10px;
-  padding-left: 0;
-  border-bottom: 1px solid #bbb;
-  color: brown;
-}
+ li {
+    background: #fbf0ff;
+    padding: 10px;
+    color: #823db5;
+    margin: 2px;
+    border-radius: 2px;
+ }

@@ -1,9 +1,13 @@
 import './App.css';
+
 import { useEffect, useState } from 'react';
+
 import {connect} from  'react-redux';
 
-function App({todos, addTodoInList, removeTodo, fetchTodos}){
+function App({todos, addTodoInList, removeTodo, fetchTodos, updateTodoInList}){
+    
     const[todo, setTodo]=useState('');
+    const [todoToedit, setTodoToedit] = useState(undefined)
 
     useEffect(() => {
         fetchTodos();
@@ -21,18 +25,34 @@ function App({todos, addTodoInList, removeTodo, fetchTodos}){
     const deleteItem=(item)=>{
         removeTodo(item)
     }
+
+    const onEdit = (item) => {
+        setTodo(item.value)
+        setTodoToedit(item)
+    }
+
+    const updateTodo = () => {
+        updateTodoInList({
+            ...todoToedit,
+            value: todo
+        })
+        setTodo('')
+        setTodoToedit(undefined)
+    }
+
     return(
-        <div>
-            <h1> Todo</h1>
-            <input type="text" value={todo} onChange={(e) =>setTodo(e.target.value)}/>
-            <button onClick={onAddTodo}>Add</button>
+        <div className="main-content">
+            <h1> Add Your Tasks</h1>
+            <input type="text" value={todo} onChange={(e) =>setTodo(e.target.value)} placeholder="Type Here..."/>
+            {todoToedit ? <button onClick={updateTodo} type="submit">Update</button> : <button onClick={onAddTodo} type="submit">Add</button>}
             <ul>
                 {
                     todos.map((item,index)=>{
                         return(
                             <li key={index}>
-                                <span onClick={()=> deleteItem(item.id)} className="delelte-icon">XX  </span>
+                                <span onClick={()=> deleteItem(item.id)} className="delete-icon">X</span>
                                 <span style={{padding:'0 10px'}}>{item && item.value}</span>
+                                <button className="edit-button" onClick={() => onEdit(item)}>Edit</button>
                             </li>
                         )
                     })
@@ -65,6 +85,12 @@ const mapDispatchToProps=(dispatch)=>{
         fetchTodos: ()=>{
             dispatch({
                 type: 'FETCH_TODOS'
+            })
+        },
+        updateTodoInList: (value) => {
+            dispatch({
+                type: 'UPDATE_TODO',
+                payload: value
             })
         }
     }

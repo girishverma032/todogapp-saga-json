@@ -20,6 +20,11 @@ function* deleteTodo(data) {
     yield put({ type: "FETCH_TODOS"});
 }
 
+function* updateTodo(data) {
+  yield axios.put('http://localhost:1234/todos/'+data.payload.id, data.payload)
+  yield put({ type: "FETCH_TODOS"});
+}
+
 function* fetchTodosWatcher() {
      yield takeLatest('FETCH_TODOS', fetchTodos)
 }
@@ -32,10 +37,15 @@ function* deleteTodoWatcher() {
     yield takeLatest('REMOVE_TODO', deleteTodo)
 }
 
+function* updateTodoWatcher() {
+  yield takeLatest('UPDATE_TODO', updateTodo)
+}
+
 export default function* rootSaga() {
    yield all([
     fetchTodosWatcher(),
     addTodosWatcher(),
-    deleteTodoWatcher()
+    deleteTodoWatcher(),
+    updateTodoWatcher()
    ]);
 }
